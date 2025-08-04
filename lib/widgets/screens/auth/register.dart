@@ -38,6 +38,14 @@ class _RegisterState extends State<Register> {
           _passwordController.text.trim(),
         );
         if (success) {
+          // Works only locally for Gmail when hosted on digitalocean
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                "Verification email sent! Please check your inbox.",
+              ),
+            ),
+          );
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => const HomePage()),

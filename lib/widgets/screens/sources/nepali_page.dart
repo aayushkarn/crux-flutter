@@ -8,14 +8,14 @@ import 'package:crux/widgets/utils/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class SourceMain extends StatefulWidget {
-  const SourceMain({super.key});
+class NepaliPage extends StatefulWidget {
+  const NepaliPage({super.key});
 
   @override
-  State<SourceMain> createState() => _SourceMainState();
+  State<NepaliPage> createState() => _NepaliPageState();
 }
 
-class _SourceMainState extends State<SourceMain> {
+class _NepaliPageState extends State<NepaliPage> {
   bool _isImageAtTop = false;
   late Future<List<Cluster>> articles;
   late ValueNotifier<bool> isImageAtTopNotifier;
@@ -24,7 +24,7 @@ class _SourceMainState extends State<SourceMain> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    articles = getArticles(context, baseUrl);
+    articles = getArticles(context, nepaliURL);
     isImageAtTopNotifier = ValueNotifier<bool>(_isImageAtTop);
   }
 
@@ -37,7 +37,7 @@ class _SourceMainState extends State<SourceMain> {
 
   Future<void> refreshArticles() async {
     setState(() {
-      articles = getArticles(context, baseUrl);
+      articles = getArticles(context, nepaliURL);
     });
   }
 
@@ -109,8 +109,14 @@ class _SourceMainState extends State<SourceMain> {
                       valueListenable: isImageAtTopNotifier,
                       builder: (context, value, child) {
                         return isImageAtTopNotifier.value
-                            ? SourceFeedDetail(article: cluster[index])
-                            : SourceFeedDefault(article: cluster[index]);
+                            ? SourceFeedDetail(
+                              article: cluster[index],
+                              language: "ENGLISH",
+                            )
+                            : SourceFeedDefault(
+                              article: cluster[index],
+                              language: "NEPALI",
+                            );
                       },
                     ),
                   ),

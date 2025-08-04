@@ -1,5 +1,6 @@
 import 'package:crux/widgets/screens/auth/profile.dart';
 import 'package:crux/widgets/screens/saved/saved_screen.dart';
+import 'package:crux/widgets/screens/sources/nepali_page.dart';
 import 'package:crux/widgets/screens/sources/source_main.dart';
 import 'package:flutter/material.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
@@ -15,6 +16,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int currentPage = 0;
   List<Widget> pages = const [
     SourceMain(),
+    NepaliPage(),
     SavedScreen(key: ValueKey("ss")),
     // MessageTemplate(message: "Settings"),
     Profile(),
@@ -40,6 +42,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       //       },
       // ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: currentPage,
         onTap: (value) {
           setState(() {
@@ -58,6 +61,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.location_on), label: ''),
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmarks_outlined),
             label: '',

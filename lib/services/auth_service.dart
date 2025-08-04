@@ -38,7 +38,7 @@ class AuthService {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({"name": name, "email": email, "password": password}),
       );
-
+      print(response);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         await saveTokens(data['access_token'], data['refresh_token']);

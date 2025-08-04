@@ -1,3 +1,5 @@
+import 'package:crux/api/sentiment_score.dart';
+import 'package:crux/widgets/screens/sentiment_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -7,6 +9,7 @@ class sourcesCard extends StatelessWidget {
   final String published;
   final String sourceLogo;
   final String sourceName;
+  final SentimentScore? contentSentiment;
 
   const sourcesCard({
     super.key,
@@ -15,6 +18,7 @@ class sourcesCard extends StatelessWidget {
     required this.published,
     required this.sourceLogo,
     required this.sourceName,
+    this.contentSentiment,
   });
 
   @override
@@ -47,13 +51,26 @@ class sourcesCard extends StatelessWidget {
                 maxLines: 1,
               ),
             ),
-            subtitle: Text(
-              'Published on: $published', // Publish date
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
-                fontFamily: 'Kanit',
-              ),
+            subtitle: Column(
+              children: [
+                Text(
+                  'Published on: $published', // Publish date
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                    fontFamily: 'Kanit',
+                  ),
+                ),
+                SizedBox(height: 6),
+                if (contentSentiment != null)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: SentimentBadge(
+                      score: contentSentiment!,
+                      small: true,
+                    ),
+                  ),
+              ],
             ),
             trailing: ClipRRect(
               borderRadius: BorderRadius.circular(40),

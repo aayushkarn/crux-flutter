@@ -13,7 +13,10 @@ import 'package:provider/provider.dart';
 final storage = FlutterSecureStorage();
 // final AuthProvider _authProvider = AuthProvider();
 
-Future<List<Cluster>> getArticles(BuildContext context) async {
+Future<List<Cluster>> getArticles(
+  BuildContext context,
+  String article_api_url,
+) async {
   final _authProvider = Provider.of<AuthProvider>(context, listen: false);
 
   try {
@@ -34,7 +37,8 @@ Future<List<Cluster>> getArticles(BuildContext context) async {
   }
   try {
     final response = await http.get(
-      Uri.parse(baseUrl),
+      // Uri.parse(baseUrl),
+      Uri.parse(article_api_url),
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
@@ -92,5 +96,38 @@ Future<UserProfile> getProfile(BuildContext context) async {
     }
   } catch (e) {
     throw Exception("Error fetching profile ${e}");
+  }
+}
+
+// Works only locally for Gmail when hosted on digitalocean
+Future<void> resendVerificationEmail(BuildContext context) async {
+  final token = await getAccessToken();
+
+  final url = Uri.parse("${baseUrl}/send_verification_email");
+
+  try {
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token', // Pass your user's auth token here
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Verification email sent! Please check your inbox.'),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Server error: ${response.statusCode}')),
+      );
+    }
+  } catch (e) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Error: $e')));
   }
 }

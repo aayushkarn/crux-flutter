@@ -1,3 +1,5 @@
+import 'package:crux/api/sentiment_score.dart';
+
 class Article {
   final int id;
   final String title;
@@ -7,6 +9,7 @@ class Article {
   final String sourceName;
   final String sourceLogo;
   final DateTime publishTimestamp;
+  final Map<String, SentimentScore>? sentiments;
 
   Article({
     required this.id,
@@ -17,6 +20,7 @@ class Article {
     required this.sourceName,
     required this.sourceLogo,
     required this.publishTimestamp,
+    this.sentiments,
   });
 
   Map<String, dynamic> toJson() {
@@ -29,11 +33,22 @@ class Article {
       "source_name": categoryName,
       "source_logo": sourceLogo,
       "publish_timestamp": publishTimestamp.millisecondsSinceEpoch ~/ 1000,
+      "sentiments": sentiments?.map(
+        (key, value) => MapEntry(key, value.toJson()),
+      ),
     };
   }
 
   factory Article.fromJson(Map<String, dynamic> json) {
     // print(json['id'].runtimeType);
+
+    Map<String, SentimentScore>? sentiments;
+    if (json['sentiments'] != null) {
+      sentiments = {};
+      json['sentiments'].forEach((key, value) {
+        sentiments![key] = SentimentScore.fromJson(value);
+      });
+    }
 
     return Article(
       // id:
@@ -58,6 +73,7 @@ class Article {
             : json['publish_timestamp'] * 1000,
         isUtc: true,
       ),
+      sentiments: sentiments,
     );
   }
 }

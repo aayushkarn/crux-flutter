@@ -101,6 +101,11 @@ flutter:
         - asset: assets/fonts/Public_Sans/static/PublicSans-Bold.ttf
         - asset: assets/fonts/Public_Sans/static/PublicSans-Medium.ttf
           weight: 500
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/Noto_Sans_Devanagari/static/NotoSansDevanagari-Bold.ttf
+        - asset: assets/fonts/Noto_Sans_Devanagari/static/NotoSansDevanagari-Medium.ttf
+          weight: 500
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

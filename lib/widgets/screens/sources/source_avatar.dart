@@ -61,6 +61,7 @@ class AvatarDetailSheet extends StatelessWidget {
                     published: "${item.publishTimestamp}",
                     sourceLogo: "${getImage(item.sourceLogo)}",
                     sourceName: item.sourceName,
+                    contentSentiment: item.sentiments?["content"],
                   ),
                 );
               },

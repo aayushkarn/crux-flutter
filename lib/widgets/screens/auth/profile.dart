@@ -130,24 +130,79 @@ class _ProfileState extends State<Profile> {
                                               ),
                                             ),
                                             SizedBox(height: 10),
-                                            Text(
-                                              "Verification Status",
-                                              style: TextStyle(
-                                                fontFamily: 'Lato',
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                            (userProfile.userVerified) == 1
-                                                ? Icon(
-                                                  Icons.verified,
-                                                  color: Colors.blue,
-                                                  size: 30,
-                                                )
-                                                : Icon(
-                                                  Icons.no_accounts,
-                                                  color: Colors.red,
-                                                  size: 30,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Verification Status",
+                                                  style: TextStyle(
+                                                    fontFamily: 'Lato',
+                                                    fontSize: 20,
+                                                  ),
                                                 ),
+                                                SizedBox(width: 10),
+                                                (userProfile.userVerified) == 1
+                                                    ? Icon(
+                                                      Icons.verified,
+                                                      color: Colors.blue,
+                                                      size: 30,
+                                                    )
+                                                    : Icon(
+                                                      Icons.no_accounts,
+                                                      color: Colors.red,
+                                                      size: 30,
+                                                    ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 10),
+                                            if ((userProfile.userVerified) != 1)
+                                              Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                          horizontal: 25,
+                                                        ),
+                                                    child: SizedBox(
+                                                      width: double.infinity,
+                                                      child: ElevatedButton(
+                                                        onPressed: () {
+                                                          // send mail
+                                                          resendVerificationEmail(
+                                                            context,
+                                                          );
+                                                        },
+                                                        child: Text(
+                                                          "Verify Email",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                        style: ElevatedButton.styleFrom(
+                                                          padding:
+                                                              const EdgeInsets.symmetric(
+                                                                vertical: 10,
+                                                              ),
+                                                          backgroundColor:
+                                                              const Color.fromARGB(
+                                                                255,
+                                                                12,
+                                                                110,
+                                                                53,
+                                                              ),
+                                                          shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  8,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                           ],
                                         ),
                                       ),
