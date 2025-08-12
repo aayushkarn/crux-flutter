@@ -111,7 +111,7 @@ class _NepaliPageState extends State<NepaliPage> {
                         return isImageAtTopNotifier.value
                             ? SourceFeedDetail(
                               article: cluster[index],
-                              language: "ENGLISH",
+                              language: "NEPALI",
                             )
                             : SourceFeedDefault(
                               article: cluster[index],
