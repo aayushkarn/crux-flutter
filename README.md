@@ -3,6 +3,8 @@
 
 [Crux client implementation in flutter](https://github.com/aayushkarn/crux)
 
+Setup config.dart file inside ```lib/api/```
+
 ```bash
 final String _baseUrl = "http://localhost:800";
 
