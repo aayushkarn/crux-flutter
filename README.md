@@ -11,6 +11,7 @@ final String _baseUrl = "http://localhost:800";
 final String _shareUrl = "http://localhost:5000";
 
 final String baseUrl = "${_baseUrl}/api";
+final String nepaliURL = "${_baseUrl}/api_nepali";
 
 String shareUrl(clusterId) {
   return "${_shareUrl}/summary/${clusterId}";
